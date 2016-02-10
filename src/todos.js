@@ -1,12 +1,11 @@
 /**
  * Created by albandauleu on 12/01/16.
  */
-import {computedFrom, ObserverLocator, inject} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
 
-@inject(ObserverLocator)
 export class Todos {
 
-    constructor(observer) {
+    constructor() {
 
 
         this.todos = [];
@@ -14,19 +13,10 @@ export class Todos {
         this.todoText = '';
         this.filter='all';
         this.showAll = true;
-        this.observerLocator = observer;
-        // subscribe to the "bar" property's changes:
-        var subscription = this.observerLocator
-            .getObserver(this, 'todos')
-            .subscribe(this.onChange);
     }
 
     activate(params, routeConfig) {
         this.filter = params.filter;
-    }
-
-    onChange(newValue, oldValue) {
-        alert(`bar changed from ${oldValue} to ${newValue}`);
     }
 
     addTodo = function(){
@@ -56,8 +46,7 @@ export class Todos {
         });
     };
 
-    @computedFrom('todos')
     get nbItemsLeft(){
-        return `${this.getFilteredTodos().length}`;
+        return this.getFilteredTodos().length;
     }
 }
