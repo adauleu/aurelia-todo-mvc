@@ -27,15 +27,15 @@ export class Todos {
     }
 
     clearTodos = function () {
-        this.todos = this.getCompleted();
+        this.todos = this.getRemaining();
     }
 
-    getCompleted = function(){
+    getRemaining = function(){
         return this.todos.filter(t => !t.completed)
     }
 
-    get nbCompleted(){
+    get nbRemaining(){
         console.log('je suis évalué')
-        return this.getCompleted().length;
+        return this.getRemaining().length;
     }
 }
